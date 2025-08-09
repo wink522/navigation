@@ -14,8 +14,13 @@ const AppContainer = styled.div`
 
 const Main = styled.main`
   flex-grow: 1;
-  padding-bottom: 2rem;
+  padding: 1rem 2rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 `;
+
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');

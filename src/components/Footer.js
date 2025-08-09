@@ -58,7 +58,7 @@ const Footer = () => {
           © {currentYear} 个人导航 | 用 <HeartIcon /> 制作
         </Copyright>
         <SocialLinks>
-          <SocialLink href="https://github.com" target="_blank" rel="noopener noreferrer">
+          <SocialLink href="https://tools.ddexai.top/" target="_blank" rel="noopener noreferrer">
             <FaGithub />
           </SocialLink>
         </SocialLinks>

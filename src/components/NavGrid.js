@@ -1,29 +1,35 @@
 import React from 'react';
 import styled from 'styled-components';
-import NavCard from './NavCard';
+import FloatingSiteCard from './FloatingSiteCard';
 
-const GridContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
-  padding: 2rem;
+const FloatingContainer = styled.div`
+  position: relative;
+  height: 75vh;
+  width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    padding: 1rem;
-    gap: 1.5rem;
-  }
+  padding: 2rem;
+  overflow: hidden;
+  background-color: rgba(245, 247, 250, 0.5);
+  border-radius: 20px;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 `;
 
 const EmptyState = styled.div`
-  grid-column: 1 / -1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
   padding: 3rem;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  z-index: 100;
+  min-width: 300px;
 `;
 
 const EmptyStateText = styled.p`
@@ -33,38 +39,33 @@ const EmptyStateText = styled.p`
 `;
 
 const NavGrid = ({ data, searchTerm }) => {
-  // 过滤数据
-  const filteredData = data.map(category => {
-    const filteredSites = category.sites.filter(site => 
-      site.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    
-    return {
-      ...category,
-      sites: filteredSites
-    };
-  }).filter(category => category.sites.length > 0);
+  // 如果搜索词为空，显示所有站点
+  // 如果有搜索词，仍然渲染所有站点，但会在FloatingSiteCard中突出显示匹配的站点
   
-  if (filteredData.length === 0) {
+  // 检查是否有匹配的站点
+  const hasMatchingSites = searchTerm === '' || 
+    data.some(site => site.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  
+  if (!hasMatchingSites) {
     return (
-      <GridContainer>
+      <FloatingContainer>
         <EmptyState>
           <EmptyStateText>没有找到匹配的网站</EmptyStateText>
         </EmptyState>
-      </GridContainer>
+      </FloatingContainer>
     );
   }
   
   return (
-    <GridContainer>
-      {filteredData.map((category, index) => (
-        <NavCard 
-          key={index}
-          category={category.category}
-          sites={category.sites}
+    <FloatingContainer>
+      {data.map((site, index) => (
+        <FloatingSiteCard 
+          key={index} 
+          site={site} 
+          searchTerm={searchTerm}
         />
       ))}
-    </GridContainer>
+    </FloatingContainer>
   );
 };
 
