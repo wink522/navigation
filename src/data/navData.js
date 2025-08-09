@@ -8,7 +8,9 @@ const navData = [
   { name: 'ip归属', url: 'https://cip.cc/', icon: 'FaIp' },
   { name: '全球手机号', url: 'https://sms-activate.ru', icon: 'FaPhone' },
   { name: 'marid绘图', url: 'https://mermaid.live/', icon: 'FaPhoto' },
-  { name: 'json工具', url: 'https://www.x-json.cn/', icon: 'FaJSON' }
+  { name: 'json工具', url: 'https://www.x-json.cn/', icon: 'FaJSON' },
+  { name: 'markdown编辑器', url: 'http://editor.md.ipandao.com', icon: 'FaMarkdown' },
+  { name: '文本编辑器', url: 'https://stackedit.io/', icon: 'FaEditor' }
 ];
 
 
